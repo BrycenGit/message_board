@@ -9,12 +9,16 @@ class Message
     @title = attributes.fetch(:title)
     @body = attributes.fetch(:body)
     @board_id = attributes.fetch(:board_id)
-    @time = attributes.fetch(:time) || Time.now
+    @time = attributes.fetch(:time) || Time.new
     @id = attributes.fetch(:id) || @@total_rows += 1
   end
 
   def self.all
     @@messages.values()
+  end
+
+  def time_stamp
+    "#{self.time.month}/#{self.time.day}/#{self.time.year}"
   end
 
   def save
@@ -52,7 +56,6 @@ class Message
     results
   end
 
-
   def self.sort_date
     @@messages.values.sort_by(&:time)
   end
@@ -71,14 +74,3 @@ class Message
     messages
   end
 end
-    
-
-  
-
-
-
-
-
-
-
-  

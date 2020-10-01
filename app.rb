@@ -9,13 +9,30 @@ get('/') do
   erb(:boards)
 end
 
+
 get('/boards') do
-  @boards = Board.all
+  if params[:newest]
+    @boards = Board.sort_date
+  elsif params[:oldest]
+    @boards = Board.sort_date.reverse
+  else
+    @boards = Board.all
+  end
   erb(:boards)
 end
 
+
 get('/boards/:id') do
-  @board = Board.find(params[:id].to_i)
+  if params[:newest]
+    @board = Board.find(params[:id].to_i)
+    @messages = Message.sort_date
+  elsif params[:oldest]
+    @board = Board.find(params[:id].to_i)
+    @messages = Message.sort_date.reverse
+  else
+    @board = Board.find(params[:id].to_i)
+    @messages = Message.all
+  end
   erb(:board)
 end
 
@@ -27,12 +44,18 @@ post('/boards') do
   erb(:boards)
 end
 
-post('/boards/:id/messages') do
+post('/boards/:id') do
   @board = Board.find(params[:id].to_i)
   @title = params[:message_name]
   @body = params[:message_body]
-  @message = Message.new({:title => "#{@title}", :body => "#{@body}", :board_id => ("#{@board.id}").to_i, :time => nil, :id => nil})
+  @message = Message.new({:title => @title, :body => "#{@body}", :board_id => ("#{@board.id}").to_i, :time => nil, :id => nil})
   @message.save
   @messages = Message.all
   erb(:board)
+end
+
+get('/boards/:id/messages/:message_id') do
+  @message = Message.find(params[:message_id].to_i)
+  @board_id = params[:id]
+  erb(:message)
 end

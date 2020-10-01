@@ -48,5 +48,13 @@ describe '#Board' do
     end
   end
 
-  
+  describe (.sort_date) do
+    it("sorts boards from newest to oldest")
+    board1 = Board.new({:title => "Groceries", :date => "10/1/2020", :id => nil})
+    board1.save()
+    board2 = Board.new({:title => "Blog Post", :date => "09/20/2020", :id => nil})
+    board2.save()
+    expect(Board.sort_date()).to(eq([board2, board1]))
+    end
+  end
 end

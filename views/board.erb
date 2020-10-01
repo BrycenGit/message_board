@@ -1,17 +1,27 @@
 <h4>Board Name: <%= @board.title %></h4>
 
-<% if @board.message %>
-  <ul>
-    <% @board.message.each do |message|%>
-    <li>
-    <a href="/boards/<%= @board.id %>/messages/<%= message.id %>"><%= message.title %></a></li>
-    <% end %>
-  </ul>
+  <% if @messages.any? %>
+    <ul>
+      <% @messages.each do |message|%>
+        <li>
+          <a href="/boards/<%= @board.id %>/messages/<%= message.id %>"><%= message.title %> - <%= message.time_stamp%></a></li>
+      <% end %>
+    </ul>
   <% else %>
     <p>There are currently no messages to display.</p>
   <% end %>
 
-<form action="/boards/<%= @board.id %>/messages" method="post">
+  <form action="/boards/<%= @board.id %>" method="get">
+  <input name="newest" type="hidden" value="newest">
+  <button type="submit">Sort Newest to Oldest</button>
+</form>
+
+<form action="/boards/<%= @board.id %>" method="get">
+  <input name="oldest" type="hidden" value="oldest">
+  <button type="submit">Sort Oldest to Newest</button>
+</form>
+
+<form action="/boards/<%= @board.id %>" method="post">
   <div class="form-group">
     <label for="message_name">Message Name</label>
     <input id="message_name" name="message_name" class="form-control" type="text">

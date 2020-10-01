@@ -6,13 +6,24 @@
   <ul>
     <% @boards.each do |board|%>
     <li>
-    <a href="/boards/<%= board.id %>"><%= board.title %></a>
+    <a href="/boards/<%= board.id %>" class="btn btn-success"><%= board.title %></a>
     </li>
   <% end %>
   </ul>
   <% else %>
     <p>There are currently no boards to display.</p>
   <% end %>
+
+
+<form action="/boards" method="get">
+  <input name="newest" type="hidden" value="newest">
+  <button type="submit">Sort Newest to Oldest</button>
+</form>
+
+<form action="/boards" method="get">
+  <input name="oldest" type="hidden" value="oldest">
+  <button type="submit">Sort Oldest to Newest</button>
+</form>
 
 <form action="/boards" method="post">
   <div class="form-group">
