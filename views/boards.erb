@@ -1,4 +1,6 @@
-<h1>MeSsAgE bOaRd WeBsItE</h1>
+<div class="jumbotron">
+  <h1>MeSsAgE bOaRd WeBsItE</h1>
+</div>
 
 <h3>YoUr MeSsAgE BoArDs</h3>
 
@@ -17,13 +19,13 @@
 
 <form action="/boards" method="get">
   <input name="newest" type="hidden" value="newest">
-  <button type="submit">Sort Newest to Oldest</button>
-</form>
+  <button class="btn btn-danger" type="submit">Sort Newest to Oldest</button>
+</form><br>
 
 <form action="/boards" method="get">
   <input name="oldest" type="hidden" value="oldest">
-  <button type="submit">Sort Oldest to Newest</button>
-</form>
+  <button class="btn btn-primary" type="submit">Sort Oldest to Newest</button>
+</form><br>
 
 <form action="/boards" method="post">
   <div class="form-group">
