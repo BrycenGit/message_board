@@ -17,7 +17,7 @@ class Board
   end
 
   def save
-    @@boards[self.id] = Board.new({:title => self.title, :date => self.date, :id => self.id, :new => 'hello'})
+    @@boards[self.id] = Board.new({:title => self.title, :date => self.date, :id => self.id})
   end
 
   def ==(board_to_compare)
@@ -55,6 +55,10 @@ class Board
   def self.sort_date
     @@boards.values.sort_by(&:date)
   end
+
+  def message
+    Message.find_by_board(self.id)
+  end  
 end
 
 

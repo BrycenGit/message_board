@@ -47,4 +47,6 @@ describe '#Board' do
     expect(board1).to(eq(board1))
     end
   end
+
+  
 end

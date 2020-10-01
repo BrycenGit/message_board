@@ -14,7 +14,13 @@
     <p>There are currently no boards to display.</p>
   <% end %>
 
-  <a href="/boards/new">Add a new board</a>
+<form action="/boards" method="post">
+  <div class="form-group">
+    <label for="board_name">Board Name</label>
+    <input id="board_name" name="board_name" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Save Board</button>
+</form>
 
   <form action="/search">
     <div class="form-group">
