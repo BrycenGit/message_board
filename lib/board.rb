@@ -6,10 +6,10 @@ class Board
   @@boards = {}
   @@total_rows = 0
 
-  def initialize (title, date, id)
-    @title = title
-    @date = date || Time.now
-    @id = id || @total_rows += 1
+  def initialize (attributes)
+    @title = attributes.fetch(:title)
+    @date = attributes.fetch(:date) || Time.now
+    @id = attributes.fetch(:id) || @@total_rows += 1
   end
 
   def self.all
@@ -17,7 +17,7 @@ class Board
   end
 
   def save
-    @@boards[self.id] = Board.new(self.title, self.date, self.id)
+    @@boards[self.id] = Board.new({:title => self.title, :date => self.date, :id => self.id, :new => 'hello'})
   end
 
   def ==(board_to_compare)
