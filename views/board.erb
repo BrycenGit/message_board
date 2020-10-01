@@ -29,6 +29,11 @@
     <input id="message_body" name="message_body" class="form-control" type="text">
   </div>
   <button type="submit" class="btn">Save Message</button>
+
+
+</form><form action="/board/<%= @board.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit">Delete board</button>
 </form>
 
 <a href='/boards'>Go back to Boards</a>

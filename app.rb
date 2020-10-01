@@ -36,6 +36,13 @@ get('/boards/:id') do
   erb(:board)
 end
 
+delete('/board/:id') do
+  @board = Board.find(params[:id].to_i())
+  @board.delete()
+  @boards = Board.all
+  erb(:boards)
+end
+
 post('/boards') do
   @title = params[:board_name]
   @board = Board.new({:title => "#{@title}", :date => nil, :id => nil})

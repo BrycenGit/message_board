@@ -59,6 +59,10 @@ class Board
   def message
     Message.find_by_board(self.id)
   end  
+
+  def delete
+    @@boards.delete(self.id)
+  end
 end
 
 
