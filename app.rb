@@ -25,13 +25,13 @@ end
 get('/boards/:id') do
   if params[:newest]
     @board = Board.find(params[:id].to_i)
-    @messages = Message.sort_date
+    @messages = Message.find_by_board(params[:id].to_i)
   elsif params[:oldest]
     @board = Board.find(params[:id].to_i)
-    @messages = Message.sort_date.reverse
+    @messages = Message.find_by_board(params[:id].to_i).reverse
   else
     @board = Board.find(params[:id].to_i)
-    @messages = Message.all
+    @messages = Message.find_by_board(params[:id].to_i)
   end
   erb(:board)
 end
@@ -57,7 +57,7 @@ post('/boards/:id') do
   @body = params[:message_body]
   @message = Message.new({:title => @title, :body => "#{@body}", :board_id => ("#{@board.id}").to_i, :time => nil, :id => nil})
   @message.save
-  @messages = Message.all
+  @messages = Message.find_by_board(params[:id].to_i)
   erb(:board)
 end
 
